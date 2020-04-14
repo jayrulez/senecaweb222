@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="fontawesome/css/all.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--
+      Part 1: Main Store Page
+
+      Requirements:
+
+      1. Header across the top must include your store's name, a logo,
+      and use a different background colour, web font, etc.  You must also include
+      a link to your contact.html page.  Your header should include info about
+      what the store is, what it sells, etc.  Use some images to try and draw
+      the user in.  NOTE: place all your site's images in the `src/images/` directory.
+
+      2. Below the header, a multi-column layout of items you can purchase in the
+      store.  You must have at least 10 items in your store, and at least 2
+      categories of items. For example, if you are selling clothing, you might
+      have categories for Men, Women, and Children, and each category would have
+      its own set of items.  Each item should include:
+      
+        - a picture
+        - the item's name/title
+        - a more complete description of the item
+        - a category (i.e., each item must belong to a category)
+        - a price.
+      
+      Each item should be its own "card" (i.e., some kind of box around each item
+      separating one from the next, with suitable whitespace between).
+
+      3. A sidebar (left or right, depending on your design) of the item layout
+      section, showing the different categories of items in your store.  If a
+      user clicks on one of the categories, use CSS and JavaScript to hide all
+      other items in the store (i.e., only show items for the chosen category).
+      Make sure you include a way to return to seeing all categories, and make it
+      obvious to the user that they are only seeing a partial list of items when
+      you filter by category (i.e., use CSS and HTML to change things somehow).
+
+      4. Below the items, a footer with the name of the store, any relevant links you
+      need to give users, as well as a small HTML form for entering an Email
+      address and clicking a "Subscribe" button to subscribe to the store's
+      newsletter. Use https://formspree.io/ to automatically submit the form to
+      your email address (i.e., when a user fills out their email address and
+      clicks submit, *you* should get that information sent to your email
+      address via formspree.io).  Make sure you setup your account on
+      https://formspree.io/.
+
+      5. Use two different Web Fonts for your store.  The titles should be different
+      from any regular text.  Use a free font service like https://fonts.google.com/
+      or any other that you choose.  You can also experiment with different font
+      sizes and colours to draw attention toward or away from various parts of
+      your design.
+
+      6. Pick a colour theme using a tool like https://colorhunt.co/ with at least
+      3 colours (primary, secondary, accent), and use them throughout your site
+      for backgrounds, borders, fonts. Your store page needs to look attractive
+      and marks will be given for good a good looking site.  No one will buy from
+      a store that looks like its owners aren't professional or don't care about
+      details.  Also make sure that the colour contrast in your site is suitable
+      for everyone to read.
+
+      7. Use modern CSS to help you achieve your layout.  For example, Flexbox
+      and CSS Grid can help you create professional looking layouts.  Here
+      are some guides to get you started:
+
+       - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
+       - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
+       
+      You are also welcome to use existing CSS libraries to help you with your layout,
+      but you must also include your own styles (i.e., you can't use a library
+      for everything in your design).
+
+      8. Make sure you don't use copyrighted materials from other sites.  If you use
+      icons, fonts, images, etc., make sure you are legally permitted to reuse them,
+      and include references to indicate where you got them. Some resources to consider:
+
+        - https://unsplash.com/ for images
+        - https://fontawesome.com/ for icons
+        - https://gallery.manypixels.co/ or https://undraw.co/illustrations for illustrations (SVG)
+
+      9. Make sure you reduce the download size of images you include in your
+      store.  Users don't want to download 10s or 100s of megabytes of data, especially
+      on mobile.  You can use an online tool like https://squoosh.app/ to help you
+      reduce images.  You will lose marks if your images aren't optimized for the web.
+       
+
+      10. Make sure you have no JavaScript or other errors in your Dev Tools Console.
+      Run your site, and test all aspects of it with the Console open, and fix
+      any issues you encounter.
+
+      11. Make sure your forms all work as they should, testing them yourself,
+      and also have someone else test it for you.  The easiest way to find bugs
+      in software is to let someone who didn't build it try to use it!
+      
+    -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">The Gear Store</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li><a href="contact.html">Contact Us</a></li>
+            <li class="d-none d-lg-inline">&nbsp;|&nbsp;</li>
+            <li id="header-cart-info"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3" id="categories-container"></div>
+
+        <div class="col-lg-9">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="">The Gear Store</a></li>
+              <li class="breadcrumb-item active" aria-current="page" id="active-category-name"></li>
+            </ol>
+          </nav>
+          <div id="products-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="social-links">
+              <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="contact.html" title="Contact Form"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="subscribe-form">
+              <form action="https://formspree.io/mayddaoz" method="post" class="form form-inline">
+                <div class="input-group">
+                  <input
+                    type="email"
+                    name="_replyto"
+                    class="form-control"
+                    placeholder="Email address"
+                    id="subscribe-input"
+                    required
+                  />
+                  <div class="input-group-append">
+                    <input
+                      type="submit"
+                      class="btn btn-primary submit-button"
+                      id="subscribe-button"
+                      value="Subscribe"
+                      title="Subscribe to our product news letter"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted"
+          >&#169; The Gear Store 2020 - WEB222 Assignment 4 - Images used in assignment are trial
+          images from https://www.shutterstock.com/</span
+        >
+      </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="modal fade" id="product-view-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-product-view-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cart-view-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-cart-view-title">Shopping cart</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      window.onload = function() {
+        (function() {
+          function populateProducts(categoryId) {
+            var products = Products.findByCategoryId(categoryId);
+            var productListNode = NodeFactory.createNode('div', 'row');
+
+            products.forEach(function(product) {
+              var productNodeContainer = NodeFactory.createNode('div', 'col-lg-4 col-md-6 mb-4');
+              var productNode = NodeFactory.createNode(
+                'div',
+                'card h-100',
+                'product-' + product.id
+              );
+
+              if (product.images.length > 0) {
+                var imageProps = product.images[0];
+                imageProps.height = '200';
+                var productImg = NodeFactory.createImg(imageProps, 'card-img-top');
+
+                productNode.appendChild(productImg);
+              }
+
+              var productDetailsNode = NodeFactory.createNode('div', 'card-body');
+
+              var productTitleNode = NodeFactory.createNode('h5', 'card-title');
+              productTitleNode.appendChild(NodeFactory.createTextNode(product.name));
+
+              productDetailsNode.appendChild(productTitleNode);
+
+              var productDescNode = NodeFactory.createNode('div', 'card-text');
+              productDescNode.appendChild(NodeFactory.createTextNode(product.desc));
+              productDetailsNode.appendChild(productDescNode);
+
+              var productPriceNode = NodeFactory.createNode('div', 'card-text');
+              var priceBadge = NodeFactory.createNode('span', 'badge badge-info');
+              priceBadge.appendChild(NodeFactory.createTextNode('$' + product.price));
+              productPriceNode.appendChild(priceBadge);
+              productDetailsNode.appendChild(productPriceNode);
+
+              productNode.appendChild(productDetailsNode);
+
+              productNode.onclick = function() {
+                openProductModal(product.id);
+              };
+
+              productNode.style.cursor = 'pointer';
+              productNodeContainer.appendChild(productNode);
+              productListNode.appendChild(productNodeContainer);
+            });
+
+            var productsContainer = document.querySelector('#products-container');
+            productsContainer.innerHTML = '';
+            productsContainer.appendChild(productListNode);
+          }
+
+          function populateCategories() {
+            var navNode = NodeFactory.createNode('nav', 'category-nav nav flex-column');
+
+            var categories = Categories.findAll();
+
+            categories.forEach(function(category) {
+              var anchor = NodeFactory.createAnchor(
+                '#',
+                category.name,
+                'nav-link',
+                'category-' + category.id
+              );
+              anchor.onclick = function(e) {
+                e.preventDefault();
+                activateCategory(category.id);
+              };
+              navNode.appendChild(anchor);
+            });
+
+            var categoriesContainer = document.querySelector('#categories-container');
+            categoriesContainer.appendChild(navNode);
+
+            if (categories.length > 0) {
+              var categoryIdToActivate = categories[0].id;
+              var categoryId = UrlHelper.getParam('category_id');
+
+              if (categoryId != null) {
+                var category = Categories.findById(categoryId);
+
+                if (category.id != -1) {
+                  categoryIdToActivate = category.id;
+                }
+              }
+
+              activateCategory(categoryIdToActivate);
+            }
+          }
+
+          function activateCategory(id) {
+            var category = Categories.findById(id);
+            if (category) {
+              document.querySelector('#active-category-name').innerHTML = category.name;
+            }
+
+            StateManager.setState('activeCategory', id);
+
+            document.querySelectorAll('#categories-container .nav-link').forEach(function(element) {
+              if (!(element.hasAttribute('id') && element.getAttribute('id') == 'category-' + id)) {
+                element.classList.remove('active');
+              } else {
+                if (!element.classList.contains('active')) {
+                  element.classList.add('active');
+                }
+              }
+            });
+
+            populateProducts(id);
+          }
+
+          function openProductModal(productId) {
+            var product = Products.findById(productId);
+
+            if (product.id > 0) {
+              document.querySelector('#modal-product-view-title').innerHTML = product.name;
+              var imageSlider = NodeFactory.createNode(
+                'div',
+                'carousel slide',
+                'product-slider-' + productId
+              );
+              imageSlider.setAttribute('data-ride', 'carousel');
+              var indicators = NodeFactory.createNode('ul', 'carousel-indicators');
+              var slideShow = NodeFactory.createNode('div', 'carousel-inner');
+
+              product.images.forEach(function(imageProps, index) {
+                var indicator = NodeFactory.createNode('li', index == 0 ? 'active' : '');
+                indicator.setAttribute('data-slide-to', index);
+                indicator.setAttribute('data-target', 'product-slider-' + productId);
+                indicators.appendChild(indicator);
+
+                var slideShowItem = NodeFactory.createNode(
+                  'div',
+                  'carousel-item' + (index == 0 ? ' active' : '')
+                );
+                var image = NodeFactory.createImg({
+                  src: imageProps.src,
+                  alt: imageProps.alt,
+                  height: '250',
+                  width: '500'
+                });
+                slideShowItem.appendChild(image);
+                slideShow.appendChild(slideShowItem);
+              });
+
+              imageSlider.appendChild(indicators);
+              imageSlider.appendChild(slideShow);
+
+              var navLeft = NodeFactory.createAnchor(
+                '#product-slider-' + productId,
+                '',
+                'carousel-control-prev'
+              );
+              navLeft.setAttribute('data-slide', 'prev');
+              navLeft.appendChild(NodeFactory.createNode('span', 'carousel-control-prev-icon'));
+
+              var navRight = NodeFactory.createAnchor(
+                '#product-slider-' + productId,
+                '',
+                'carousel-control-next'
+              );
+              navRight.setAttribute('data-slide', 'next');
+              navRight.appendChild(NodeFactory.createNode('span', 'carousel-control-next-icon'));
+
+              imageSlider.appendChild(navLeft);
+              imageSlider.appendChild(navRight);
+
+              var imageSliderContainer = document.querySelector('#product-view-modal .modal-body');
+              imageSliderContainer.innerHTML = '';
+              imageSliderContainer.appendChild(imageSlider);
+
+              var footer = document.querySelector('#product-view-modal .modal-footer');
+              var addToCartButton = NodeFactory.createAnchor('#', '', 'btn btn-primary');
+              var addToCartIcon = NodeFactory.createNode('i', 'fas fa-plus');
+              addToCartButton.appendChild(addToCartIcon);
+
+              addToCartButton.onclick = function(e) {
+                e.preventDefault();
+                addToCart(product.id);
+                $('#product-view-modal').modal('hide');
+              };
+
+              addToCartButton.appendChild(
+                NodeFactory.createTextNode(' Add to cart $' + product.price)
+              );
+
+              footer.innerHTML = '';
+              footer.appendChild(addToCartButton);
+
+              $('#product-view-modal').modal('show');
+            }
+          }
+
+          function addToCart(productId) {
+            var product = Products.findById(productId);
+            if (product.id > 0) {
+              if (!CartManager.hasItem(product.id)) {
+                CartManager.addItem(product);
+              }
+              updateShoppingCart();
+            }
+          }
+
+          showHeaderAuthInfo();
+          updateShoppingCart();
+          populateCategories();
+        })();
+      };
+    </script>
+  </body>
+</html>

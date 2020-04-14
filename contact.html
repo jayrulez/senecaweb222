@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="fontawesome/css/all.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--    
+
+    Part 2: Contact Us Page
+
+    Requirements:
+
+    1. Use the same header/footer, colours, fonts, etc. as your index.html page.
+    It should be obvious to the user they they are still on the same site, and that
+    contact.html is part of your store.
+	
+	Done
+
+    2. Include an HTML Form for the user to fill out his or her information along
+    with their message to you. Your form should including the following, and all
+    fields should be mandatory unless otherwise noted, and use the most appropriate <input> type:
+    
+        - First Name
+        - Last Name
+        - Email Address
+        - Address
+        - City (use a <datalist> for autocomplete of common Canadian cities)
+        - Phone Number (must be a valid Canadian Phone Number, use regex)
+        - Postal Code (must be a valid Canadian Postal Code, use regex)
+        - Checkbox Option to be phoned ("Would you like to be phoned?")
+        - Radio Options to specify what this is about: one of "Question",
+          "Comment", or "Order Problem". If the user selects "Order Problem",
+          dynamically reveal another input box to enter the order number. In the
+          case of "Comment" or "Question" hide this input box.
+        - A large area to enter the message that they want to send
+        - A hidden input field with your name
+		
+		Done
+
+    3. The form should submit to https://httpbin.org/post using the POST method,
+    and only allow the user to submit when all data has been entered and there
+    aren't any validation errors.  The data posted to httpbin.org should include
+    all data defined in the form above (e.g., visible and hidden fields).
+	
+	Done
+
+  -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">The Gear Store</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li><a href="contact.html">Contact Us</a></li>
+            <li class="d-none d-lg-inline">&nbsp;|&nbsp;</li>
+            <li id="header-cart-info"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div id="validation-summary"></div>
+          <div class="contact-form">
+            <h3>Leave us a message</h3>
+            <p class="text-muted">We will get back to you as soon as possible.</p>
+            <form class="form" action="https://httpbin.org/post" id="contact-form" method="post">
+              <input type="hidden" name="name" value="Robert Campbell" />
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="fname">First Name</label>
+                  <input class="form-control" type="text" id="fname" name="fname" required />
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="form-label" for="lname">Last Name</label>
+                  <input class="form-control" type="text" id="lname" name="lname" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input class="form-control" type="email" id="email" name="email" required />
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-5">
+                  <label class="form-label" for="address">Address</label>
+                  <input class="form-control" type="text" id="address" name="address" required />
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="form-label" for="city">City</label>
+                  <input class="form-control" id="city" name="city" list="cities" />
+                  <datalist id="cities">
+                    <option value="Fort Smith"> </option>
+                    <option value="Hay River"> </option>
+                    <option value="Inuvik"> </option>
+                    <option value="Tuktoyaktuk"> </option>
+                    <option value="Yellowknife"> </option>
+                    <option value="Baddeck"> </option>
+                    <option value="Digby"> </option>
+                    <option value="Glace Bay"> </option>
+                    <option value="Halifax"> </option>
+                    <option value="Liverpool"> </option>
+                    <option value="Louisbourg"> </option>
+                    <option value="Lunenburg"> </option>
+                    <option value="Pictou"> </option>
+                    <option value="Port Hawkesbury"> </option>
+                    <option value="Springhill"> </option>
+                    <option value="Sydney"> </option>
+                    <option value="Yarmouth"> </option>
+                    <option value="Iqaluit"> </option>
+                    <option value="Bancroft"> </option>
+                    <option value="Barrie"> </option>
+                    <option value="Belleville"> </option>
+                    <option value="Brampton"> </option>
+                    <option value="Brantford"> </option>
+                    <option value="Brockville"> </option>
+                    <option value="Burlington"> </option>
+                    <option value="Cambridge"> </option>
+                    <option value="Chatham"> </option>
+                    <option value="Chatham-Kent"> </option>
+                    <option value="Cornwall"> </option>
+                    <option value="Elliot Lake"> </option>
+                    <option value="Etobicoke"> </option>
+                    <option value="Fort Erie"> </option>
+                    <option value="Fort Frances"> </option>
+                    <option value="Gananoque"> </option>
+                    <option value="Guelph"> </option>
+                    <option value="Hamilton"> </option>
+                    <option value="Iroquois Falls"> </option>
+                    <option value="Kapuskasing"> </option>
+                    <option value="Kawartha Lakes"> </option>
+                    <option value="Kenora"> </option>
+                    <option value="Kingston"> </option>
+                    <option value="Kirkland Lake"> </option>
+                    <option value="Kitchener"> </option>
+                    <option value="Laurentian Hills"> </option>
+                    <option value="London"> </option>
+                    <option value="Midland"> </option>
+                    <option value="Mississauga"> </option>
+                    <option value="Moose Factory"> </option>
+                    <option value="Moosonee"> </option>
+                    <option value="Niagara Falls"> </option>
+                    <option value="Niagara-on-the-Lake"> </option>
+                    <option value="North Bay"> </option>
+                    <option value="North York"> </option>
+                    <option value="Oakville"> </option>
+                    <option value="Orillia"> </option>
+                    <option value="Oshawa"> </option>
+                    <option value="Ottawa"> </option>
+                    <option value="Parry Sound"> </option>
+                    <option value="Perth"> </option>
+                    <option value="Peterborough"> </option>
+                    <option value="Picton"> </option>
+                    <option value="Port Colborne"> </option>
+                    <option value="Saint Catharines"> </option>
+                    <option value="Saint Thomas"> </option>
+                    <option value="Sarnia-Clearwater"> </option>
+                    <option value="Sault Sainte Marie"> </option>
+                    <option value="Scarborough"> </option>
+                    <option value="Simcoe"> </option>
+                    <option value="Stratford"> </option>
+                    <option value="Sudbury"> </option>
+                    <option value="Temiskaming Shores"> </option>
+                    <option value="Thorold"> </option>
+                    <option value="Thunder Bay"> </option>
+                    <option value="Timmins"> </option>
+                    <option value="Toronto"> </option>
+                    <option value="Trenton"> </option>
+                    <option value="Waterloo"> </option>
+                    <option value="Welland"> </option>
+                    <option value="West Nipissing"> </option>
+                    <option value="Windsor"> </option>
+                    <option value="Woodstock"> </option>
+                    <option value="York"> </option>
+                    <option value="Borden"> </option>
+                    <option value="Cavendish"> </option>
+                    <option value="Charlottetown"> </option>
+                    <option value="Souris"> </option>
+                    <option value="Summerside"> </option>
+                    <option value="Asbestos"> </option>
+                    <option value="Baie-Comeau"> </option>
+                    <option value="Beloeil"> </option>
+                    <option value="Cap-de-la-Madeleine"> </option>
+                    <option value="Chambly"> </option>
+                    <option value="Charlesbourg"> </option>
+                    <option value="Châteauguay"> </option>
+                    <option value="Chibougamau"> </option>
+                    <option value="Côte-Saint-Luc"> </option>
+                    <option value="Dorval"> </option>
+                    <option value="Gaspé"> </option>
+                    <option value="Gatineau"> </option>
+                    <option value="Granby"> </option>
+                    <option value="Havre-Saint-Pierre"> </option>
+                    <option value="Hull"> </option>
+                    <option value="Jonquière"> </option>
+                    <option value="Kuujjuaq"> </option>
+                    <option value="La Salle"> </option>
+                    <option value="La Tuque"> </option>
+                    <option value="Lachine"> </option>
+                    <option value="Laval"> </option>
+                    <option value="Lévis"> </option>
+                    <option value="Longueuil"> </option>
+                    <option value="Magog"> </option>
+                    <option value="Matane"> </option>
+                    <option value="Montreal"> </option>
+                    <option value="Montréal-Nord"> </option>
+                    <option value="Percé"> </option>
+                    <option value="Port-Cartier"> </option>
+                    <option value="Quebec"> </option>
+                    <option value="Rimouski"> </option>
+                    <option value="Rouyn-Noranda"> </option>
+                    <option value="Saguenay"> </option>
+                    <option value="Saint-Eustache"> </option>
+                    <option value="Saint-Hubert"> </option>
+                    <option value="Sainte-Anne-de-Beaupré"> </option>
+                    <option value="Sainte-Foy"> </option>
+                    <option value="Sainte-Thérèse"> </option>
+                    <option value="Sept-Îles"> </option>
+                    <option value="Sherbrooke"> </option>
+                    <option value="Sorel-Tracy"> </option>
+                    <option value="Trois-Rivières"> </option>
+                    <option value="Val-d’Or"> </option>
+                    <option value="Waskaganish"> </option>
+                    <option value="Batoche"> </option>
+                    <option value="Cumberland House"> </option>
+                    <option value="Estevan"> </option>
+                    <option value="Flin Flon"> </option>
+                    <option value="Moose Jaw"> </option>
+                    <option value="Prince Albert"> </option>
+                    <option value="Regina"> </option>
+                    <option value="Saskatoon"> </option>
+                    <option value="Uranium City"> </option>
+                    <option value="Dawson"> </option>
+                    <option value="Watson Lake"> </option>
+                    <option value="Whitehorse"> </option>
+                  </datalist>
+                </div>
+
+                <div class="form-group col-md-3">
+                  <label class="form-label" for="postalCode">Postal Code</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="postalCode"
+                    name="postalCode"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input class="form-control" type="tel" id="phone" name="phone" required />
+              </div>
+
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="phoneMe" name="phoneMe" />
+                  <label for="phoneMe">Would you like to be phoned?</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">What is this about?</label>
+                <div class="form-control">
+                  <div class="form-check">
+                    <label
+                      ><input
+                        class="form-check-input"
+                        type="radio"
+                        name="subject"
+                        value="question"
+                      />
+                      Question</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <label
+                      ><input
+                        class="form-check-input"
+                        type="radio"
+                        name="subject"
+                        value="comment"
+                      />
+                      Comment</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <label
+                      ><input
+                        class="form-check-input"
+                        type="radio"
+                        name="subject"
+                        value="problem"
+                      />
+                      Order Problem</label
+                    >
+                  </div>
+
+                  <input class="form-control" type="text" id="orderNum" name="orderNum" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <textarea id="message" name="message" class="form-control" required></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary submit-button" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="social-links">
+              <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="contact.html" title="Contact Form"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="subscribe-form">
+              <form action="https://formspree.io/mayddaoz" method="post" class="form form-inline">
+                <div class="input-group">
+                  <input
+                    type="email"
+                    name="_replyto"
+                    class="form-control"
+                    placeholder="Email address"
+                    id="subscribe-input"
+                    required
+                  />
+                  <div class="input-group-append">
+                    <input
+                      type="submit"
+                      class="btn btn-primary submit-button"
+                      id="subscribe-button"
+                      value="Subscribe"
+                      title="Subscribe to our product news letter"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted"
+          >&#169; The Gear Store 2020 - WEB222 Assignment 4 - Images used in assignment are trial
+          images from https://www.shutterstock.com/</span
+        >
+      </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cart-view-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-cart-view-title">Shopping cart</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      window.onload = function() {
+        var subjects = document.querySelectorAll("input[name='subject']");
+        var problemChecked = false;
+        var subs = Array.from(subjects);
+        subs.forEach(function(sub, index) {
+          if (sub.checked) {
+            if (sub.value == 'problem') problemChecked = true;
+          }
+        });
+
+        var orderNum = document.querySelector('#orderNum');
+        if (problemChecked) {
+          if (orderNum.classList.contains('d-none')) {
+            orderNum.classList.remove('d-none');
+          }
+        } else {
+          if (!orderNum.classList.contains('d-none')) {
+            orderNum.classList.add('d-none');
+          }
+        }
+
+        subjects.forEach(function(subject) {
+          var parent = subject.parentNode;
+
+          parent.onclick = function() {
+            var orderNum = document.querySelector('#orderNum');
+            if (subject.value == 'problem') {
+              if (orderNum.classList.contains('d-none')) {
+                orderNum.classList.remove('d-none');
+              }
+            } else {
+              if (!orderNum.classList.contains('d-none')) {
+                orderNum.classList.add('d-none');
+              }
+            }
+          };
+        });
+
+        function showValidationSummary(summary) {
+          var summaryContainer = document.querySelector('#validation-summary');
+
+          var content =
+            '<div class="alert alert-danger"><p>Please correct the following errors: </p><ul>';
+          summary.forEach(function(line) {
+            content += '<li>' + line + '</li>';
+          });
+          content += '</ul></div>';
+
+          summaryContainer.innerHTML = content;
+        }
+
+        (function() {
+          showHeaderAuthInfo();
+          updateShoppingCart();
+
+          var subjects = document.querySelectorAll("input[name='subject']");
+
+          subjects.forEach(function(subject) {
+            subject.onclick = function() {};
+          });
+
+          document.querySelector('#contact-form').onsubmit = function() {
+            var validationSummary = [];
+
+            var firstName = document.querySelector('#fname');
+            if (firstName.value.trim() == '') {
+              validationSummary.push('First Name is required.');
+            }
+
+            var lastName = document.querySelector('#lname');
+            if (lastName.value.trim() == '') {
+              validationSummary.push('Last Name is required.');
+            }
+
+            var email = document.querySelector('#email');
+            if (email.value.trim() == '') {
+              validationSummary.push('Email Address is required.');
+            }
+
+            var address = document.querySelector('#address');
+            if (address.value.trim() == '') {
+              validationSummary.push('Address is required.');
+            }
+
+            var city = document.querySelector('#city');
+            if (city.value.trim() == '') {
+              validationSummary.push('City is required.');
+            }
+
+            var postalCode = document.querySelector('#postalCode');
+            if (postalCode.value.trim() == '') {
+              validationSummary.push('Postal Code is required.');
+            } else {
+              var regex = new RegExp(/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/);
+              if (!regex.test(postalCode.value.trim())) {
+                validationSummary.push('Postal code is invalid.');
+              } else {
+                console.log('regex passed');
+              }
+            }
+
+            var phone = document.querySelector('#phone');
+            if (phone.value.trim() == '') {
+              validationSummary.push('Phone Number is required.');
+            }
+
+            var phoneMe = document.querySelector('#phoneMe');
+
+            var subjects = document.querySelectorAll("input[name='subject']");
+
+            var checked = 0;
+            var problemChecked = false;
+            var subs = Array.from(subjects);
+            subs.forEach(function(sub, index) {
+              if (sub.checked) {
+                if (sub.value == 'problem') problemChecked = true;
+                checked++;
+              }
+            });
+
+            if (checked == 0) {
+              validationSummary.push('Select what the message is about.');
+            }
+
+            if (problemChecked) {
+              var orderNum = document.querySelector('#orderNum');
+              if (orderNum.value.trim() == '') {
+                validationSummary.push('Order Number is required.');
+              }
+            }
+
+            var message = document.querySelector('#message');
+            if (message.value.trim() == '') {
+              validationSummary.push('Message is required.');
+            }
+
+            if (validationSummary.length > 0) {
+              showValidationSummary(validationSummary);
+            }
+
+            return validationSummary.length == 0;
+          };
+        })();
+      };
+    </script>
+  </body>
+</html>
