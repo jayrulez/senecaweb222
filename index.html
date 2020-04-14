@@ -259,7 +259,7 @@
 
               var productPriceNode = NodeFactory.createNode('div', 'card-text');
               var priceBadge = NodeFactory.createNode('span', 'badge badge-info');
-              priceBadge.appendChild(NodeFactory.createTextNode('$' + product.price));
+              priceBadge.appendChild(NodeFactory.createTextNode('$' + product.price.toFixed(2)));
               productPriceNode.appendChild(priceBadge);
               productDetailsNode.appendChild(productPriceNode);
 
@@ -410,7 +410,7 @@
               };
 
               addToCartButton.appendChild(
-                NodeFactory.createTextNode(' Add to cart $' + product.price)
+                NodeFactory.createTextNode(' Add to cart $' + product.price.toFixed(2))
               );
 
               footer.innerHTML = '';
